@@ -123,13 +123,28 @@ public class PlaygroundController {
 	    emailText.setText("Enter Email");
 	    TextField emailTextField = new TextField();
 	    
+	    
+	    Text sizeText = new Text();
+	    sizeText.setText("Enter the number of the element you waht to see ");
+	    TextField sizeTextField = new TextField();
+	    
+	    Text pageText = new Text();
+	    pageText.setText("Enter the page you waht to see ");
+	    TextField pageTextField = new TextField();
+	    
 	    root.add(userPlaygroundText,5,0);
 	    root.add(userPlaygroundTextField,5,1);
 	    
 	    root.add(emailText,5,2);
 	    root.add(emailTextField,5,3);
 	    
-	    root.add(SendButton, 5, 4);
+	    root.add(sizeText,5,4);
+	    root.add(sizeTextField,5,5);
+	    
+	    root.add(pageText,5,6);
+	    root.add(pageTextField,5,7);
+	    
+	    root.add(SendButton, 5, 8);
 	    
 	    leftPane.getChildren().add(root);
 	    
@@ -179,6 +194,14 @@ public class PlaygroundController {
 	    distanceText.setText("Enter distance");
 	    TextField distanceTextField = new TextField();
 	    
+	    Text sizeText = new Text();
+	    sizeText.setText("Enter the number of the element you waht to see ");
+	    TextField sizeTextField = new TextField();
+	    
+	    Text pageText = new Text();
+	    pageText.setText("Enter the page you waht to see ");
+	    TextField pageTextField = new TextField();
+	    
 	    
 	    root.add(userPlaygroundText,5,0);
 	    root.add(userPlaygroundTextField,5,1);
@@ -194,8 +217,15 @@ public class PlaygroundController {
 	     
 	    root.add(distanceText,5,8);
 	    root.add(distanceTextField,5,9);
+	    
+	    root.add(sizeText,5,10);
+	    root.add(sizeTextField,5,11);
+	    
+	    root.add(pageText,5,12);
+	    root.add(pageTextField,5,13);
+	    
 	        
-	    root.add(SendButton, 5, 10);
+	    root.add(SendButton, 5, 14);
 	    
 	    leftPane.getChildren().add(root);
 
@@ -241,6 +271,14 @@ public class PlaygroundController {
 	    valueText.setText("Enter attribute value");
 	    TextField valueTextField = new TextField();
 	    
+	    Text sizeText = new Text();
+	    sizeText.setText("Enter the number of the element you waht to see ");
+	    TextField sizeTextField = new TextField();
+	    
+	    Text pageText = new Text();
+	    pageText.setText("Enter the page you waht to see ");
+	    TextField pageTextField = new TextField();
+	    
 	    
 	    root.add(userPlaygroundText,5,0);
 	    root.add(userPlaygroundTextField,5,1);
@@ -254,7 +292,13 @@ public class PlaygroundController {
 	    root.add(valueText,5,6);
 	    root.add(valueTextField,5,7);
 	    
-	    root.add(SendButton, 5, 8);
+	    root.add(sizeText,5,8);
+	    root.add(sizeTextField,5,9);
+	    
+	    root.add(pageText,5,10);
+	    root.add(pageTextField,5,11);
+	    
+	    root.add(SendButton, 5, 12);
 	    
 	    leftPane.getChildren().add(root);
 

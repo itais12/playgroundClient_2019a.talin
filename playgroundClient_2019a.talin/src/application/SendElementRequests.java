@@ -30,6 +30,7 @@ public class SendElementRequests {
 		 TextField emailTextField = (TextField) gridPaneobservableList.get(3);
 		 TextField elementPlaygroundField = (TextField) gridPaneobservableList.get(5);
 		 TextField IdField = (TextField) gridPaneobservableList.get(7);
+
 		 
 		 System.out.println(userPlaygroundTextField.getText());	 
 	}
@@ -40,6 +41,8 @@ public class SendElementRequests {
 		 
 		 TextField userPlaygroundTextField = (TextField) gridPaneobservableList.get(1);
 		 TextField emailTextField = (TextField) gridPaneobservableList.get(3);
+		 TextField sizeTextField = (TextField) gridPaneobservableList.get(5);
+		 TextField pageTextField = (TextField) gridPaneobservableList.get(7);
 		 
 		 System.out.println(userPlaygroundTextField.getText());
 	}
@@ -54,7 +57,8 @@ public class SendElementRequests {
 		 TextField xTextField= (TextField) gridPaneobservableList.get(5);
 		 TextField yTextField = (TextField) gridPaneobservableList.get(7);
 		 TextField distanceTextField = (TextField) gridPaneobservableList.get(9);
-		 
+		 TextField sizeTextField = (TextField) gridPaneobservableList.get(11);
+		 TextField pageTextField = (TextField) gridPaneobservableList.get(13);
 		 
 		 System.out.println(userPlaygroundTextField.getText());
 	}
@@ -68,6 +72,8 @@ public class SendElementRequests {
 		 TextField emailTextField = (TextField) gridPaneobservableList.get(3); 
 		 TextField attributeTextField= (TextField) gridPaneobservableList.get(5);
 		 TextField valueTextField = (TextField) gridPaneobservableList.get(7);
+		 TextField sizeTextField = (TextField) gridPaneobservableList.get(9);
+		 TextField pageTextField = (TextField) gridPaneobservableList.get(11);
 		 
 		 System.out.println(userPlaygroundTextField.getText());
 		 
