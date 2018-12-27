@@ -1,13 +1,10 @@
 package application;
 
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -59,7 +56,7 @@ public class PlaygroundController {
 	    
 	    Text userPlaygroundText = new Text();
 	    userPlaygroundText.setText("Enter user play ground");
-	    TextField userPlaygroundTextField = new TextField ();
+	    TextField userPlaygroundTextField = new TextField();
 	    
 	    
 	    Text emailText = new Text(); 
@@ -70,8 +67,8 @@ public class PlaygroundController {
 	    IdText.setText("Enter Element ID");
 	    
 	    //create all the TextField
-	    TextField emailTextField = new TextField ();
-	    TextField elementPlaygroundField = new TextField ();
+	    TextField emailTextField = new TextField();
+	    TextField elementPlaygroundField = new TextField();
 	    TextField IdField = new TextField ();
 	    
 	    root.add(userPlaygroundText,5,0);
@@ -119,12 +116,12 @@ public class PlaygroundController {
 	    
 	    Text userPlaygroundText = new Text();
 	    userPlaygroundText.setText("Enter user play ground");
-	    TextField userPlaygroundTextField = new TextField ();
+	    TextField userPlaygroundTextField = new TextField();
 	    
 	    
 	    Text emailText = new Text(); 
 	    emailText.setText("Enter Email");
-	    TextField emailTextField = new TextField ();
+	    TextField emailTextField = new TextField();
 	    
 	    root.add(userPlaygroundText,5,0);
 	    root.add(userPlaygroundTextField,5,1);
@@ -163,24 +160,24 @@ public class PlaygroundController {
 	    
 	    Text userPlaygroundText = new Text();
 	    userPlaygroundText.setText("Enter user play ground");
-	    TextField userPlaygroundTextField = new TextField ();
+	    TextField userPlaygroundTextField = new TextField();
 	    
 	    
 	    Text emailText = new Text(); 
 	    emailText.setText("Enter Email");
-	    TextField emailTextField = new TextField ();
+	    TextField emailTextField = new TextField();
 	    
 	    Text xText = new Text(); 
 	    xText.setText("Enter x");
-	    TextField xTextField = new TextField ();
+	    TextField xTextField = new TextField();
 	    
 	    Text yText = new Text(); 
 	    yText.setText("Enter y");
-	    TextField yTextField = new TextField ();
+	    TextField yTextField = new TextField();
 	    
 	    Text distanceText = new Text(); 
 	    distanceText.setText("Enter distance");
-	    TextField distanceTextField = new TextField ();
+	    TextField distanceTextField = new TextField();
 	    
 	    
 	    root.add(userPlaygroundText,5,0);
@@ -234,15 +231,15 @@ public class PlaygroundController {
 	    
 	    Text emailText = new Text(); 
 	    emailText.setText("Enter Email");
-	    TextField emailTextField = new TextField ();
+	    TextField emailTextField = new TextField();
 	    
 	    Text attributeText = new Text(); 
 	    attributeText.setText("Enter attribute name");
-	    TextField attributeTextField = new TextField ();
+	    TextField attributeTextField = new TextField();
 	    
 	    Text valueText = new Text(); 
 	    valueText.setText("Enter attribute value");
-	    TextField valueTextField = new TextField ();
+	    TextField valueTextField = new TextField();
 	    
 	    
 	    root.add(userPlaygroundText,5,0);
@@ -307,19 +304,101 @@ public class PlaygroundController {
 	@FXML
 	public void createNewActivity()
 	{
-		System.out.println("create New Activity");
-	    leftPane.getChildren().clear();
+	    leftPane.getChildren().clear();  
 		Button SendButton = new Button();
 	    SendButton.setText("create new activity");
-	    leftPane.getChildren().add(SendButton);
-	}
-	
-	
-	@FXML
-	public void clickSend()
-	{
+	    
+	    SendActivityRequests activityRequests = new SendActivityRequests();
+	    
+		SendButton.setOnAction(new EventHandler() {
+			
+			@Override
+			public void handle(Event arg0) {
+				activityRequests.createNewActivityRequest(leftPane, rightPane);		
+			}
+		});
+		
+	    GridPane root = new GridPane();
+	    root.setHgap(10);
+	    root.setVgap(10);
+		
+	    Text userPlaygroundText = new Text();
+	    userPlaygroundText.setText("Enter user play ground");
+	    TextField userPlaygroundTextField = new TextField();
+	    
+	    Text emailText = new Text(); 
+	    emailText.setText("Enter Email");
+	    TextField emailTextField = new TextField();
+	    
+	    
+	    Text activityText = new Text(); 
+	    activityText.setText("Enter Activity:");
+	    
+	    
+	    Text playgroundText = new Text(); 
+	    playgroundText.setText("Enter playground");
+	    TextField playgroundTextField = new TextField();
+	    
+	    
+	    Text idText = new Text(); 
+	    idText.setText("Enter id");
+	    TextField idTextField = new TextField();
+	    
+	    Text elementPlaygroundText = new Text(); 
+	    elementPlaygroundText.setText("Enter element Playground");
+	    TextField elementPlaygroundTextField = new TextField();
+	    
+	    Text elementIdText = new Text(); 
+	    elementIdText.setText("Enter element Id");
+	    TextField elementIdTextField = new TextField();
+	    
+	    Text typeText = new Text(); 
+	    typeText.setText("Enter type");
+	    TextField typeTextField = new TextField();
+	    
+	    Text attributeNameText = new Text(); 
+	    attributeNameText.setText("Enter attribute name");
+	    TextField attributeNameTextField = new TextField();
+	    
+	    Text attributeValueText = new Text(); 
+	    attributeValueText.setText("Enter attribute value");
+	    TextField attributeValueTextField = new TextField();
+	    
+	    
+	    root.add(userPlaygroundText,5,0);
+	    root.add(userPlaygroundTextField,5,1);
+	    
+	    root.add(emailText,5,2);
+	    root.add(emailTextField,5,3);
+	    
+	    root.add(activityText,5,4);
+	    
+	    root.add(playgroundText,5,5);
+	    root.add(playgroundTextField,5,6);
+	    
+	    root.add(idText,5,7);
+	    root.add(idTextField,5,8);
+	    
+	    root.add(elementPlaygroundText,5,9);
+	    root.add(elementPlaygroundTextField,5,10);
+	    
+	    root.add(elementIdText,5,11);
+	    root.add(elementIdTextField,5,12);
+	    
+	    root.add(typeText,5,13);
+	    root.add(typeTextField,5,14);
+	    
+	    root.add(attributeNameText,5,15);
+	    root.add(attributeNameTextField,5,16);
+	    
+	    root.add(attributeValueText,5,17);
+	    root.add(attributeValueTextField,5,18);
+	    
+	    root.add(SendButton, 5, 19);
+	    
+	    leftPane.getChildren().add(root);
 
-		 
+	    
 	}
 	
 	
