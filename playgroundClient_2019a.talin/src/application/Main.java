@@ -1,24 +1,19 @@
 package application;
 	
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.control.SplitPane;
+import javafx.scene.layout.BorderPane;
+import javafx.fxml.FXMLLoader;
 
 
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
-		FXMLLoader loader;
 		try {
-			loader = new FXMLLoader(getClass().getResource("PlaygroundClient.fxml"));
-			SplitPane root = (SplitPane)loader.load();
-			// set a whitesmoke background
-			root.setStyle("-fx-background-color: whitesmoke;");
-			Scene scene = new Scene(root,800,600);
+			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("PlaygroundClient.fxml"));
+			Scene scene = new Scene(root,400,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setTitle("2019a.talin playgroundClient");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {

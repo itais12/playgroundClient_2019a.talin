@@ -3,11 +3,43 @@
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 
-<SplitPane dividerPositions="0.09197324414715718" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.playgroundController">
-   <items>
-      <Button mnemonicParsing="false" text="Button" />
-      <Button mnemonicParsing="false" text="Button" />
-   </items>
-</SplitPane>
+<BorderPane prefHeight="269.0" prefWidth="293.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PlaygroundController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="elenments">
+            <items>
+              <MenuItem fx:id="addNewElementItem" mnemonicParsing="false" onAction="#addNewElement" text="add New Element" />
+                  <MenuItem fx:id="getElementsItem" mnemonicParsing="false" onAction="#getElement" text="get Element" />
+                  <MenuItem fx:id="getAllElementItem" mnemonicParsing="false" onAction="#getAllElement" text="Get All Element" />
+                  <MenuItem fx:id="getAllNearElementItem" mnemonicParsing="false" onAction="#getAllNearElement" text="Get All Near Elements" />
+                  <MenuItem fx:id="getAllElementWithAttributeItem" mnemonicParsing="false" onAction="#getAllElementWithAttribute" text="get All Element With Attributes" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="users">
+            <items>
+              <MenuItem fx:id="createNewUserItem" mnemonicParsing="false" onAction="#createNewUser" text="create new user" />
+                  <MenuItem fx:id="updateUserItem" mnemonicParsing="false" onAction="#updateUser" text="update user" />
+                  <MenuItem fx:id="verifyUserItem" mnemonicParsing="false" onAction="#verifyUser" text="verify user" />
+                  <MenuItem fx:id="userLoginItem" mnemonicParsing="false" onAction="#userLogin" text="user login" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="activity">
+            <items>
+              <MenuItem fx:id="createNewActivityItem" mnemonicParsing="false" onAction="#createNewActivity" text="Create new activity" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane fx:id="leftPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+          <AnchorPane fx:id="rightPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+        </items>
+      </SplitPane>
+   </center>
+</BorderPane>
