@@ -242,7 +242,7 @@ public class PlaygroundController {
 	    
 	    
 	    Text userPlaygroundText = new Text();
-	    userPlaygroundText.setText("Enter user play ground");
+	    userPlaygroundText.setText("Enter user playground");
 	    TextField userPlaygroundTextField = new TextField();
 	    
 	    
@@ -285,7 +285,7 @@ public class PlaygroundController {
 		SendElementRequests elementRequests = new SendElementRequests();
 	    
 		Button SendButton = new Button();
-	    SendButton.setText("get all Element");
+	    SendButton.setText("get all Elements ");
 
 		SendButton.setOnAction(new EventHandler() {
 			@Override
@@ -302,7 +302,7 @@ public class PlaygroundController {
 	    
 	    
 	    Text userPlaygroundText = new Text();
-	    userPlaygroundText.setText("Enter user play ground");
+	    userPlaygroundText.setText("Enter user playground");
 	    TextField userPlaygroundTextField = new TextField();
 	    
 	    
@@ -361,7 +361,7 @@ public class PlaygroundController {
 	    
 	    
 	    Text userPlaygroundText = new Text();
-	    userPlaygroundText.setText("Enter user play ground");
+	    userPlaygroundText.setText("Enter user playground");
 	    TextField userPlaygroundTextField = new TextField();
 	    
 	    
@@ -423,7 +423,7 @@ public class PlaygroundController {
 	{
 	    leftPane.getChildren().clear();
 		Button SendButton = new Button();
-	    SendButton.setText("get all the element with attribute");
+	    SendButton.setText("get all the elements with attribute");
 
 		SendElementRequests elementRequests = new SendElementRequests();
 	    
@@ -442,7 +442,7 @@ public class PlaygroundController {
 	    
 	    
 	    Text userPlaygroundText = new Text();
-	    userPlaygroundText.setText("Enter user play ground");
+	    userPlaygroundText.setText("Enter user playground");
 	    TextField userPlaygroundTextField = new TextField ();
 	    
 	    
@@ -726,7 +726,7 @@ public class PlaygroundController {
 	    root.setVgap(10);
 		
 	    Text userPlaygroundText = new Text();
-	    userPlaygroundText.setText("Enter user play ground");
+	    userPlaygroundText.setText("Enter user playground");
 	    TextField userPlaygroundTextField = new TextField();
 	    
 	    Text emailText = new Text(); 

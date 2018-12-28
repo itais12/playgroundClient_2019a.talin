@@ -144,10 +144,10 @@ public class SendElementRequests {
 	private ElementTO getElementFromServer(TextField userPlaygroundTextField, TextField emailTextField,
 			TextField elementPlaygroundField, TextField IdField) {
 		String url = base_url + "/playground/elements/{userPlayground}/{email}/{playground}/{id}";
-		String userPlayground = "talin2019";
-		String email = "user@mail.com";
+		String userPlayground = "2019a.talin";
+		String email = "demouser@mail.com";
 		String elementPlayground = "2019a.talin";
-		String elementId = "0";
+		String elementId = "5";
 
 		if (!userPlaygroundTextField.getText().trim().isEmpty()) {
 			userPlayground = userPlaygroundTextField.getText();
@@ -164,8 +164,12 @@ public class SendElementRequests {
 		if (!IdField.getText().trim().isEmpty()) {
 			elementId = IdField.getText();
 		}
+		
+		ElementTO element = this.restTemplate.getForObject(url, ElementTO.class, userPlayground, email, elementPlayground,
+				elementId);
+		
 
-		return new ElementTO();
+		return element;
 	}
 
 	private void ShowElement(AnchorPane rightPane, ElementTO element) {
@@ -204,10 +208,10 @@ public class SendElementRequests {
 
 		String url = base_url + "/playground/elements/{userPlayground}/{userEmail}/all?size={size}&page={page}";
 
-		String userPlayground = "talin2019";
-		String email = "user@mail.com";
-		String size = "0";
-		String page = "0";
+		String userPlayground = "2019a.talin";
+		String email = "demouser@mail.com";
+		int size = 10;
+		int page = 0;
 
 		if (!userPlaygroundTextField.getText().trim().isEmpty()) {
 			userPlayground = userPlaygroundTextField.getText();
@@ -218,24 +222,18 @@ public class SendElementRequests {
 		}
 
 		if (!sizeTextField.getText().trim().isEmpty()) {
-			size = sizeTextField.getText();
+			size = Integer.parseInt(sizeTextField.getText());
 		}
 
 		if (!pageTextField.getText().trim().isEmpty()) {
-			page = pageTextField.getText();
+			page = Integer.parseInt(pageTextField.getText());
+			System.out.println(page);
 		}
+		System.out.println(page);
 
-		ElementTO[] elements = new ElementTO[10];
-		elements[0] = new ElementTO();
-		elements[1] = new ElementTO();
-		elements[2] = new ElementTO();
-		elements[3] = new ElementTO();
-		elements[4] = new ElementTO();
-		elements[5] = new ElementTO();
-		elements[6] = new ElementTO();
-		elements[7] = new ElementTO();
-		elements[8] = new ElementTO();
-		elements[9] = new ElementTO();
+		ElementTO[] elements = this.restTemplate.getForObject(url, ElementTO[].class, userPlayground, email,
+				size, page);
+				
 		return elements;
 	}
 
@@ -293,13 +291,13 @@ public class SendElementRequests {
 		String url = base_url
 				+ "/playground/elements/{userPlayground}/{userEmail}/near/{x}/{y}/{distance}?size={size}&page={page}";
 
-		String userPlayground = "talin2019";
-		String email = "user@mail.com";
-		String x = "0.0";
-		String y = "0.0";
+		String userPlayground = "2019a.talin";
+		String email = "demouser@mail.com";
+		double x = 0.0;
+		double y = 0.0;
 		String distance = "5.0";
-		String size = "0";
-		String page = "0";
+		int size = 10;
+		int page = 0;
 
 		if (!userPlaygroundTextField.getText().trim().isEmpty()) {
 			userPlayground = userPlaygroundTextField.getText();
@@ -310,11 +308,11 @@ public class SendElementRequests {
 		}
 
 		if (!xTextField.getText().trim().isEmpty()) {
-			x = xTextField.getText();
+			x = Double.parseDouble(xTextField.getText());
 		}
 
 		if (!yTextField.getText().trim().isEmpty()) {
-			y = yTextField.getText();
+			y = Double.parseDouble(yTextField.getText());
 		}
 
 		if (!distanceTextField.getText().trim().isEmpty()) {
@@ -322,22 +320,17 @@ public class SendElementRequests {
 		}
 
 		if (!sizeTextField.getText().trim().isEmpty()) {
-			size = sizeTextField.getText();
+			size = Integer.parseInt(sizeTextField.getText());
 		}
 
 		if (!pageTextField.getText().trim().isEmpty()) {
-			page = pageTextField.getText();
+			page = Integer.parseInt( pageTextField.getText());
 		}
 
 		// go to web to get data
-		ElementTO[] elements = new ElementTO[7];
-		elements[0] = new ElementTO();
-		elements[1] = new ElementTO();
-		elements[2] = new ElementTO();
-		elements[3] = new ElementTO();
-		elements[4] = new ElementTO();
-		elements[5] = new ElementTO();
-		elements[6] = new ElementTO();
+		ElementTO[] elements = this.restTemplate.getForObject(url, ElementTO[].class, userPlayground, email, x,
+				y, distance, size, page);
+
 
 		return elements;
 	}
@@ -367,12 +360,12 @@ public class SendElementRequests {
 		String url = base_url
 				+ "/playground/elements/{userPlayground}/{email}/search/{attributeName}/{value}?size={size}&page={page}";
 
-		String userPlayground = "talin2019";
-		String email = "user@mail.com";
+		String userPlayground = "2019a.talin";
+		String email = "demouser@mail.com";
 		String attribute = "eat";
 		String value = "meat";
-		String size = "0";
-		String page = "0";
+		int size = 10;
+		int page = 0;
 
 		if (!userPlaygroundTextField.getText().trim().isEmpty()) {
 			userPlayground = userPlaygroundTextField.getText();
@@ -391,20 +384,17 @@ public class SendElementRequests {
 		}
 
 		if (!sizeTextField.getText().trim().isEmpty()) {
-			size = sizeTextField.getText();
+			size = Integer.parseInt(sizeTextField.getText());
 		}
 
 		if (!pageTextField.getText().trim().isEmpty()) {
-			page = pageTextField.getText();
+			page = Integer.parseInt( pageTextField.getText());
 		}
 
 		// go to web to get data
-		ElementTO[] elements = new ElementTO[5];
-		elements[0] = new ElementTO();
-		elements[1] = new ElementTO();
-		elements[2] = new ElementTO();
-		elements[3] = new ElementTO();
-		elements[4] = new ElementTO();
+		ElementTO[] elements = this.restTemplate.getForObject(url, ElementTO[].class, userPlayground, email, attribute,value,
+				 size, page);
+			
 
 		return elements;
 	}

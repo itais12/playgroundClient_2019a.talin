@@ -1,19 +1,35 @@
 package application;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
 public class SendActivityRequests {
 	
-	
+	private RestTemplate restTemplate;
 	private String base_url;
 	private String port = "8083";
+	private ObjectMapper jackson;
 	
 	public SendActivityRequests() {
 		base_url = "http://localhost:" + port;
+		this.restTemplate = new RestTemplate();
+		jackson = new ObjectMapper();
+		
 	}
 	
 	private ObservableList<Node> getGridPaneObservableList(AnchorPane leftPane)
@@ -60,15 +76,16 @@ public class SendActivityRequests {
 	{
 		String url = base_url + "/playground/activities/{userPlayground}/{email}";
 		
-		String userPlayground = "talin2019";
-		String email = "user@mail.com";
-		String playground = "eat";
-		String id = "meat";
-		String type = "meat";
-		String elementPlayground = "0";
-		String elementId = "meat";
-		String attributeName = "0";
-		String attributeValue = "0";
+		String userPlayground = "2019a.talin";
+		String email = "demouser@mail.com";
+		
+		String playground = "2019a.talin";
+		String id = "5";
+		String type = "Feed";
+		String elementPlayground = "2019a.talin";
+		String elementId = "10";
+		String attributeName = "eat";
+		String attributeValue = "meat";
 		
 		
 		if(!userPlaygroundTextField.getText().trim().isEmpty())
@@ -80,6 +97,8 @@ public class SendActivityRequests {
 		{
 			email = emailTextField.getText();
 		}
+		
+		
 		if(!playgroundTextField.getText().trim().isEmpty())
 		{
 			playground = playgroundTextField.getText();
@@ -115,14 +134,52 @@ public class SendActivityRequests {
 			attributeValue = attributeValueTextField.getText();
 		}
 		
+		Map<String,Object> attributes = new HashMap<>();
+		attributes.put(attributeName, attributeValue);
+		
+		ActivityTO activity = new ActivityTO(elementPlayground, elementId, type, userPlayground, email, attributes);
+		activity.setPlayground(playground);
+		activity.setId(id);
 		
 		
-		return null;
+		
+		Object rv = this.restTemplate.postForObject(url, activity, Object.class, userPlayground, email);
+		
+		return rv;
 	}
 	
-	private void ShowActivity(AnchorPane rightPane,Object obj)
+	private void ShowActivity(AnchorPane rightPane,Object rv)
 	{
 		rightPane.getChildren().clear();
+		
+		
+		GridPane root = new GridPane();
+		root.setHgap(10);
+		root.setVgap(10);
+
+		Text text = new Text();
+		Map<String, Object> rvMap = null;
+		
+		try {
+			rvMap = this.jackson.readValue(this.jackson.writeValueAsString(rv), Map.class);
+		}  catch (Exception e) {
+
+		}
+		if(rvMap != null)
+		{
+			text.setText(""+rvMap.toString());
+			root.add(text, 5, 0);
+
+			rightPane.getChildren().add(root);
+		}
+		else
+		{
+			text.setText("can't show the result \n");
+			root.add(text, 5, 0);
+
+			rightPane.getChildren().add(root);
+		}
+
 	}
 	
 	
