@@ -57,11 +57,14 @@ public class PlaygroundController {
 	    Text locationText = new Text();
 	    locationText.setText("Enter Element location x,y");
 	    
-	    Text attributesText = new Text();
-	    attributesText.setText("Enter Element attributes");
+	    Text attributesKeyText = new Text();
+	    attributesKeyText.setText("Enter Element attribute name ");
+	    
+	    Text attributesValueText = new Text();
+	    attributesValueText.setText("Enter Element attribute value");
 	    
 	    Text expirationDateText = new Text();
-	    expirationDateText.setText("Enter Element expiration Date");
+	    expirationDateText.setText("Enter Element expiration Date: (format= \"January 2, 2010\"");
 	    
 	    //create all the TextField
 	    TextField userPlaygroundTextField = new TextField();
@@ -69,7 +72,8 @@ public class PlaygroundController {
 	    TextField elementNameTextField = new TextField();
 	    TextField elementTypeTextField = new TextField();
 	    TextField locationTextField = new TextField ();
-	    TextField attributesTextField = new TextField ();
+	    TextField attributesKeyTextField = new TextField ();
+	    TextField attributesValueTextField = new TextField ();
 	    TextField expirationDateTextField = new TextField ();
 
 	    
@@ -88,14 +92,17 @@ public class PlaygroundController {
 	    root.add(locationText,5,8);
 	    root.add(locationTextField,5,9);
 	    
-	    root.add(attributesText,5,10);
-	    root.add(attributesTextField,5,11);
+	    root.add(attributesKeyText,5,10);
+	    root.add(attributesKeyTextField,5,11);
 	    
-	    root.add(expirationDateText,5,12);
-	    root.add(expirationDateTextField,5,13);
+	    root.add(attributesValueText,5,12);
+	    root.add(attributesValueTextField,5,13);
+	    
+	    root.add(expirationDateText,5,14);
+	    root.add(expirationDateTextField,5,15);
 	    
 	
-	    root.add(SendButton, 5, 14);
+	    root.add(SendButton, 5, 16);
 	    
 	    leftPane.getChildren().add(root);	
 	    
@@ -149,8 +156,11 @@ public class PlaygroundController {
 	    Text locationText = new Text();
 	    locationText.setText("Enter Element location x,y");
 	    
-	    Text attributesText = new Text();
-	    attributesText.setText("Enter Element attributes");
+	    Text attributesKeyText = new Text();
+	    attributesKeyText.setText("Enter Element attribute name ");
+	    
+	    Text attributesValueText = new Text();
+	    attributesValueText.setText("Enter Element attribute value");
 	    
 	    Text expirationDateText = new Text();
 	    expirationDateText.setText("Enter Element expiration Date");
@@ -160,11 +170,11 @@ public class PlaygroundController {
 	    TextField emailTextField = new TextField();
 	    TextField elementPlaygroundTextField = new TextField();
 	    TextField IdTextField = new TextField();
-
 	    TextField elementNameTextField = new TextField();
 	    TextField elementTypeTextField = new TextField();
 	    TextField locationTextField = new TextField ();
-	    TextField attributesTextField = new TextField ();
+	    TextField attributesKeyTextField = new TextField ();
+	    TextField attributesValueTextField = new TextField ();
 	    TextField expirationDateTextField = new TextField ();
 
 	    
@@ -191,14 +201,17 @@ public class PlaygroundController {
 	    root.add(locationText,5,13);
 	    root.add(locationTextField,5,14);
 	    
-	    root.add(attributesText,5,15);
-	    root.add(attributesTextField,5,16);
+	    root.add(attributesKeyText,5,15);
+	    root.add(attributesKeyTextField,5,16);
 	    
-	    root.add(expirationDateText,5,17);
-	    root.add(expirationDateTextField,5,18);
+	    root.add(attributesValueText,5,17);
+	    root.add(attributesValueTextField,5,18);
+	    
+	    root.add(expirationDateText,5,19);
+	    root.add(expirationDateTextField,5,20);
 	    
 	
-	    root.add(SendButton, 5, 19);
+	    root.add(SendButton, 5, 21);
 	    
 	    leftPane.getChildren().add(root);	
 	   	}

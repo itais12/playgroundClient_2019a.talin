@@ -128,7 +128,9 @@ public class ElementTO {
 	public void setAttributes(Map<String, Object> attributes) {
 		this.attributes = attributes;
 	}
-
+	public void addAttributes(String key, String value) {
+		this.attributes.put(key, value);
+	}
 
 	public String getCreatorPlayground() {
 		return creatorPlayground;
