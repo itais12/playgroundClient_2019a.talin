@@ -365,6 +365,16 @@ public class SendElementRequests {
 
 		return elements;
 	}
+
+	public void addNewElementRequest(AnchorPane leftPane, AnchorPane rightPane) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateElementRequest(AnchorPane leftPane, AnchorPane rightPane) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

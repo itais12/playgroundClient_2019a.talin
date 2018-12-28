@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
+
 public class PlaygroundController {
 	@FXML
 	AnchorPane leftPane;
@@ -19,15 +20,188 @@ public class PlaygroundController {
 	@FXML
 	public void addNewElement()
 	{
-		System.out.println("addNewElement");
-		
 	    leftPane.getChildren().clear();
 	    
-	    
+		SendElementRequests elementRequests = new SendElementRequests();
+
 		Button SendButton = new Button();
 	    SendButton.setText("create new element");
-	    leftPane.getChildren().add(SendButton);
-	}
+		
+		
+		SendButton.setOnAction(new EventHandler() {
+			@Override
+			public void handle(Event arg0) {
+				elementRequests.addNewElementRequest(leftPane, rightPane);
+				
+			}
+		});
+	    
+		
+	    GridPane root = new GridPane();
+	    root.setHgap(10);
+	    root.setVgap(10);
+	    
+	    
+	    Text userPlaygroundText = new Text();
+	    userPlaygroundText.setText("Enter user playground");	    
+	    
+	    Text emailText = new Text(); 
+	    emailText.setText("Enter Email");
+	    
+	    Text elementNameText = new Text();
+	    elementNameText.setText("Enter Element name");
+	    
+	    Text elementTypeText = new Text();
+	    elementTypeText.setText("Enter Element type");
+	    
+	    Text locationText = new Text();
+	    locationText.setText("Enter Element location x,y");
+	    
+	    Text attributesText = new Text();
+	    attributesText.setText("Enter Element attributes");
+	    
+	    Text expirationDateText = new Text();
+	    expirationDateText.setText("Enter Element expiration Date");
+	    
+	    //create all the TextField
+	    TextField userPlaygroundTextField = new TextField();
+	    TextField emailTextField = new TextField();
+	    TextField elementNameTextField = new TextField();
+	    TextField elementTypeTextField = new TextField();
+	    TextField locationTextField = new TextField ();
+	    TextField attributesTextField = new TextField ();
+	    TextField expirationDateTextField = new TextField ();
+
+	    
+	    root.add(userPlaygroundText,5,0);
+	    root.add(userPlaygroundTextField,5,1);
+	    
+	    root.add(emailText,5,2);
+	    root.add(emailTextField,5,3);
+	    
+	    root.add(elementNameText,5,4);
+	    root.add(elementNameTextField,5,5);
+	    
+	    root.add(elementTypeText,5,6);
+	    root.add(elementTypeTextField,5,7);
+	    
+	    root.add(locationText,5,8);
+	    root.add(locationTextField,5,9);
+	    
+	    root.add(attributesText,5,10);
+	    root.add(attributesTextField,5,11);
+	    
+	    root.add(expirationDateText,5,12);
+	    root.add(expirationDateTextField,5,13);
+	    
+	
+	    root.add(SendButton, 5, 14);
+	    
+	    leftPane.getChildren().add(root);	
+	    
+	  	}
+	@FXML
+	public void updateElement()
+	{
+	    leftPane.getChildren().clear();
+	    
+		SendElementRequests elementRequests = new SendElementRequests();
+
+		Button SendButton = new Button();
+	    SendButton.setText("update Element");
+		
+		
+		SendButton.setOnAction(new EventHandler() {
+			@Override
+			public void handle(Event arg0) {
+				elementRequests.updateElementRequest(leftPane, rightPane);
+				
+			}
+		});
+	    
+		
+	    GridPane root = new GridPane();
+	    root.setHgap(10);
+	    root.setVgap(10);
+	    
+	    
+	    Text userPlaygroundText = new Text();
+	    userPlaygroundText.setText("Enter user play ground");
+	    
+	    Text emailText = new Text(); 
+	    emailText.setText("Enter Email");
+	    
+	    Text elementPlaygroundText = new Text();
+	    elementPlaygroundText.setText("Enter Element Playground");
+	    
+	    Text IdText = new Text();
+	    IdText.setText("Enter Element ID");
+	    
+	    Text updateText = new Text();
+	    updateText.setText("Enter update element:");
+	    
+	    Text elementNameText = new Text();
+	    elementNameText.setText("Enter Element name");
+	    
+	    Text elementTypeText = new Text();
+	    elementTypeText.setText("Enter Element type");
+	    
+	    Text locationText = new Text();
+	    locationText.setText("Enter Element location x,y");
+	    
+	    Text attributesText = new Text();
+	    attributesText.setText("Enter Element attributes");
+	    
+	    Text expirationDateText = new Text();
+	    expirationDateText.setText("Enter Element expiration Date");
+	    
+	    //create all the TextField
+	    TextField userPlaygroundTextField = new TextField();
+	    TextField emailTextField = new TextField();
+	    TextField elementPlaygroundTextField = new TextField();
+	    TextField IdTextField = new TextField();
+
+	    TextField elementNameTextField = new TextField();
+	    TextField elementTypeTextField = new TextField();
+	    TextField locationTextField = new TextField ();
+	    TextField attributesTextField = new TextField ();
+	    TextField expirationDateTextField = new TextField ();
+
+	    
+	    root.add(userPlaygroundText,5,0);
+	    root.add(userPlaygroundTextField,5,1);
+	    
+	    root.add(emailText,5,2);
+	    root.add(emailTextField,5,3);
+	    
+	    root.add(elementPlaygroundText,5,4);
+	    root.add(elementPlaygroundTextField,5,5);
+	    
+	    root.add(IdText,5,6);
+	    root.add(IdTextField,5,7);
+	    
+	    root.add(updateText,5,8);
+
+	    root.add(elementNameText,5,9);
+	    root.add(elementNameTextField,5,10);
+	    
+	    root.add(elementTypeText,5,11);
+	    root.add(elementTypeTextField,5,12);
+	    
+	    root.add(locationText,5,13);
+	    root.add(locationTextField,5,14);
+	    
+	    root.add(attributesText,5,15);
+	    root.add(attributesTextField,5,16);
+	    
+	    root.add(expirationDateText,5,17);
+	    root.add(expirationDateTextField,5,18);
+	    
+	
+	    root.add(SendButton, 5, 19);
+	    
+	    leftPane.getChildren().add(root);	
+	   	}
 	
 	@FXML
 	public void getElement()
@@ -308,42 +482,211 @@ public class PlaygroundController {
 	@FXML
 	public void createNewUser()
 	{
-		System.out.println("create New User");
 	    leftPane.getChildren().clear();
-		Button SendButton = new Button();
+	    Button SendButton = new Button();
 	    SendButton.setText("create new user");
-	    leftPane.getChildren().add(SendButton);
-	}
+
+		SendUserRequest userRequests = new SendUserRequest();
+	    
+		SendButton.setOnAction(new EventHandler() {
+			@Override
+			public void handle(Event arg0) {
+				userRequests.createNewUserRequest(leftPane, rightPane);
+				
+			}
+		});
+		
+		
+	    GridPane root = new GridPane();
+	    root.setHgap(10);
+	    root.setVgap(10);
+	    
+
+	    Text emailText = new Text(); 
+	    emailText.setText("Enter Email");
+	    TextField emailTextField = new TextField();
+	    
+	    Text usernameText = new Text(); 
+	    usernameText.setText("Enter user name");
+	    TextField usernameTextField = new TextField();
+	    
+	    Text avatarText = new Text(); 
+	    avatarText.setText("Enter avatar");
+	    TextField avatarTextField = new TextField();
+	    
+	    Text roleText = new Text();
+	    roleText.setText("Enter user role ");
+	    TextField roleTextField = new TextField();
+	    
+	   	    
+	    root.add(emailText,5,0);
+	    root.add(emailTextField,5,1);
+	    
+	    root.add(usernameText,5,2);
+	    root.add(usernameTextField,5,3);
+	    
+	    root.add(avatarText,5,4);
+	    root.add(avatarTextField,5,5);
+	    
+	    root.add(roleText,5,6);
+	    root.add(roleTextField,5,7);
+	    
+	  
+	    root.add(SendButton, 5, 8);
+	    
+	    leftPane.getChildren().add(root);
+
+		}
 	
 	@FXML
 	public void updateUser()
 	{
-		System.out.println("Update User");
 	    leftPane.getChildren().clear();
-		Button SendButton = new Button();
+	    Button SendButton = new Button();
 	    SendButton.setText("update user");
-	    leftPane.getChildren().add(SendButton);
+
+		SendUserRequest userRequests = new SendUserRequest();
+	    
+		SendButton.setOnAction(new EventHandler() {
+			@Override
+			public void handle(Event arg0) {
+				userRequests.updateUserRequest(leftPane, rightPane);
+			}
+		});
+	    GridPane root = new GridPane();
+	    root.setHgap(10);
+	    root.setVgap(10);
+	    
+	    Text playgroundText = new Text(); 
+	    playgroundText.setText("Enter playground ");
+	    TextField playgroundTextField = new TextField();
+	    
+	    Text emailText = new Text(); 
+	    emailText.setText("Enter Email");
+	    TextField emailTextField = new TextField();
+	    
+	    Text userUpdateText = new Text(); 
+	    userUpdateText.setText("Enter user update:");
+
+	    Text usernameText = new Text(); 
+	    usernameText.setText("Enter user name");
+	    TextField usernameTextField = new TextField();
+	    
+	    Text avatarText = new Text(); 
+	    avatarText.setText("Enter avatar");
+	    TextField avatarTextField = new TextField();
+	    
+	    Text roleText = new Text();
+	    roleText.setText("Enter user role ");
+	    TextField roleTextField = new TextField();
+	    
+	    root.add(playgroundText,5,0);
+	    root.add(playgroundTextField,5,1);
+	    
+	    root.add(emailText,5,2);
+	    root.add(emailTextField,5,3);
+	    
+	    root.add(userUpdateText,5,4);
+
+	    root.add(usernameText,5,5);
+	    root.add(usernameTextField,5,6);
+	    
+	    root.add(avatarText,5,7);
+	    root.add(avatarTextField,5,8);
+	    
+	    root.add(roleText,5,9);
+	    root.add(roleTextField,5,10);
+	    
+	    root.add(SendButton, 5, 11);
+	    
+	    leftPane.getChildren().add(root);
 	}
 	
 	@FXML
 	public void verifyUser()
 	{
-		System.out.println("Verify User");
 	    leftPane.getChildren().clear();
-		Button SendButton = new Button();
+	    Button SendButton = new Button();
 	    SendButton.setText("verify user");
-	    leftPane.getChildren().add(SendButton);
+
+		SendUserRequest userRequests = new SendUserRequest();
+	    
+		SendButton.setOnAction(new EventHandler() {
+			@Override
+			public void handle(Event arg0) {
+				userRequests.verifyUser(leftPane, rightPane);
+			}
+		});
+		
+	    GridPane root = new GridPane();
+	    root.setHgap(10);
+	    root.setVgap(10);
+	    
+	    Text playgroundText = new Text(); 
+	    playgroundText.setText("Enter playground ");
+	    TextField playgroundTextField = new TextField();
+	    
+	    Text emailText = new Text(); 
+	    emailText.setText("Enter Email");
+	    TextField emailTextField = new TextField();
+	    
+	    Text codeText = new Text(); 
+	    codeText.setText("Enter code");
+	    TextField codeTextField = new TextField();
+	    
+	    root.add(playgroundText,5,0);
+	    root.add(playgroundTextField,5,1);
+	    
+	    root.add(emailText,5,2);
+	    root.add(emailTextField,5,3);
+	   
+	    root.add(codeText,5,5);
+	    root.add(codeTextField,5,6);
+	    
+	    root.add(SendButton, 5, 11);
+	    
+	    leftPane.getChildren().add(root);
+	    
 	}
 	
 	@FXML
 	public void userLogin()
 	{
-		System.out.println("user Login");
 	    leftPane.getChildren().clear();
-		Button SendButton = new Button();
+	    Button SendButton = new Button();
 	    SendButton.setText("login");
-	    leftPane.getChildren().add(SendButton);
-	}
+
+		SendUserRequest userRequests = new SendUserRequest();
+	    
+		SendButton.setOnAction(new EventHandler() {
+			@Override
+			public void handle(Event arg0) {
+				userRequests.userLogin(leftPane, rightPane);
+			}
+		});
+		
+	    GridPane root = new GridPane();
+	    root.setHgap(10);
+	    root.setVgap(10);
+	    
+	    Text playgroundText = new Text(); 
+	    playgroundText.setText("Enter playground ");
+	    TextField playgroundTextField = new TextField();
+	    
+	    Text emailText = new Text(); 
+	    emailText.setText("Enter Email");
+	    TextField emailTextField = new TextField();
+	    
+	    root.add(playgroundText,5,0);
+	    root.add(playgroundTextField,5,1);
+	    
+	    root.add(emailText,5,2);
+	    root.add(emailTextField,5,3);
+	    
+	    root.add(SendButton, 5, 11);
+	    
+	    leftPane.getChildren().add(root);
+	  	}
 	
 	@FXML
 	public void createNewActivity()

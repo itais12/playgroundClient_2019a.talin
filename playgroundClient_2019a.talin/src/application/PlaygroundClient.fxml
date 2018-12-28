@@ -9,24 +9,25 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="elenments">
+          <Menu mnemonicParsing="false" text="Users">
             <items>
-              <MenuItem fx:id="addNewElementItem" mnemonicParsing="false" onAction="#addNewElement" text="add New Element" />
-                  <MenuItem fx:id="getElementsItem" mnemonicParsing="false" onAction="#getElement" text="get Element" />
+                  <MenuItem fx:id="userLoginItem" mnemonicParsing="false" onAction="#userLogin" text="User login" />
+              <MenuItem fx:id="createNewUserItem" mnemonicParsing="false" onAction="#createNewUser" text="Create new user" />
+                  <MenuItem fx:id="verifyUserItem" mnemonicParsing="false" onAction="#verifyUser" text="Verify user" />
+                  <MenuItem fx:id="updateUserItem" mnemonicParsing="false" onAction="#updateUser" text="Update user" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Elements">
+            <items>
+              <MenuItem fx:id="addNewElementItem" mnemonicParsing="false" onAction="#addNewElement" text="Add New Element" />
+                  <MenuItem fx:id="updateElementItem" mnemonicParsing="false" onAction="#updateElement" text="Update Element" />
+                  <MenuItem fx:id="getElementsItem" mnemonicParsing="false" onAction="#getElement" text="Get Element" />
                   <MenuItem fx:id="getAllElementItem" mnemonicParsing="false" onAction="#getAllElement" text="Get All Element" />
                   <MenuItem fx:id="getAllNearElementItem" mnemonicParsing="false" onAction="#getAllNearElement" text="Get All Near Elements" />
-                  <MenuItem fx:id="getAllElementWithAttributeItem" mnemonicParsing="false" onAction="#getAllElementWithAttribute" text="get All Element With Attributes" />
+                  <MenuItem fx:id="getAllElementWithAttributeItem" mnemonicParsing="false" onAction="#getAllElementWithAttribute" text="Get All Element With Attributes" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="users">
-            <items>
-              <MenuItem fx:id="createNewUserItem" mnemonicParsing="false" onAction="#createNewUser" text="create new user" />
-                  <MenuItem fx:id="updateUserItem" mnemonicParsing="false" onAction="#updateUser" text="update user" />
-                  <MenuItem fx:id="verifyUserItem" mnemonicParsing="false" onAction="#verifyUser" text="verify user" />
-                  <MenuItem fx:id="userLoginItem" mnemonicParsing="false" onAction="#userLogin" text="user login" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="activity">
+          <Menu mnemonicParsing="false" text="Activity">
             <items>
               <MenuItem fx:id="createNewActivityItem" mnemonicParsing="false" onAction="#createNewActivity" text="Create new activity" />
             </items>
