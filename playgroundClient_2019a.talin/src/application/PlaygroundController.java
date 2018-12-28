@@ -517,20 +517,22 @@ public class PlaygroundController {
 
 	    Text emailText = new Text(); 
 	    emailText.setText("Enter Email");
-	    TextField emailTextField = new TextField();
 	    
 	    Text usernameText = new Text(); 
 	    usernameText.setText("Enter user name");
-	    TextField usernameTextField = new TextField();
 	    
 	    Text avatarText = new Text(); 
 	    avatarText.setText("Enter avatar");
-	    TextField avatarTextField = new TextField();
 	    
 	    Text roleText = new Text();
 	    roleText.setText("Enter user role ");
-	    TextField roleTextField = new TextField();
 	    
+	    
+	    TextField emailTextField = new TextField();
+	    TextField usernameTextField = new TextField();
+	    TextField avatarTextField = new TextField();
+	    TextField roleTextField = new TextField();
+
 	   	    
 	    root.add(emailText,5,0);
 	    root.add(emailTextField,5,1);
@@ -572,27 +574,28 @@ public class PlaygroundController {
 	    
 	    Text playgroundText = new Text(); 
 	    playgroundText.setText("Enter playground ");
-	    TextField playgroundTextField = new TextField();
 	    
 	    Text emailText = new Text(); 
 	    emailText.setText("Enter Email");
-	    TextField emailTextField = new TextField();
 	    
 	    Text userUpdateText = new Text(); 
 	    userUpdateText.setText("Enter user update:");
 
 	    Text usernameText = new Text(); 
 	    usernameText.setText("Enter user name");
-	    TextField usernameTextField = new TextField();
 	    
 	    Text avatarText = new Text(); 
 	    avatarText.setText("Enter avatar");
-	    TextField avatarTextField = new TextField();
 	    
 	    Text roleText = new Text();
 	    roleText.setText("Enter user role ");
-	    TextField roleTextField = new TextField();
 	    
+	    TextField playgroundTextField = new TextField();
+	    TextField emailTextField = new TextField();
+	    TextField usernameTextField = new TextField();
+	    TextField avatarTextField = new TextField();
+	    TextField roleTextField = new TextField();
+
 	    root.add(playgroundText,5,0);
 	    root.add(playgroundTextField,5,1);
 	    

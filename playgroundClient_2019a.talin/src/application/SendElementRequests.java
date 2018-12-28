@@ -41,9 +41,10 @@ public class SendElementRequests {
 		TextField userPlaygroundTextField = (TextField) gridPaneobservableList.get(1);
 		TextField emailTextField = (TextField) gridPaneobservableList.get(3);
 		// new element
+
 		TextField elementNameTextField = (TextField) gridPaneobservableList.get(5);
 		TextField elementTypeTextField = (TextField) gridPaneobservableList.get(7);
-		TextField locationTextField = (TextField) gridPaneobservableList.get(8);
+		TextField locationTextField = (TextField) gridPaneobservableList.get(9);
 		TextField attributesKeyTextField = (TextField) gridPaneobservableList.get(11);
 		TextField attributesValueTextField = (TextField) gridPaneobservableList.get(13);
 		TextField expirationDateTextField = (TextField) gridPaneobservableList.get(15);
