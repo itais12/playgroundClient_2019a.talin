@@ -123,11 +123,16 @@ public class SendElementRequests {
 
 		ElementTO updatedElement = newElementFromGUI(elementNameTextField, elementTypeTextField, locationTextField,
 				attributesKeyTextField, attributesValueTextField, expirationDateTextField);
-
+		try {
 		this.restTemplate.put(url, updatedElement, userPlaygroundTextField.getText().trim(),
 				emailTextField.getText().trim(), elementPlaygroundTextField.getText().trim(),
 				IdTextField.getText().trim());
 		ShowElement(rightPane, updatedElement);
+		}
+		catch (Exception e) {
+			errorScreen( rightPane, "error while geting data \n");
+		}
+		
 	}
 
 	public void getElementsRequest(AnchorPane leftPane, AnchorPane rightPane) {
