@@ -5,9 +5,9 @@ public class NewUserForm {
 	private String username;
 	private String avatar;
 	private String role;
-	
+
 	public NewUserForm() {
-		this("","","","");
+		this("", "", "", "");
 	}
 
 	public NewUserForm(String email, String username, String avatar, String role) {
@@ -49,6 +49,5 @@ public class NewUserForm {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
-	
+
 }

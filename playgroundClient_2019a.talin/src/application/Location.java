@@ -61,7 +61,5 @@ public class Location {
 			return false;
 		return true;
 	}
-	
-	
 
 }

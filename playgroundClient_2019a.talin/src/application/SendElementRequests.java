@@ -21,11 +21,12 @@ public class SendElementRequests {
 	private RestTemplate restTemplate;
 	private String base_url;
 	private String port = "8083";
+	FunctionHelper funcHelp;
 
 	public SendElementRequests() {
 		base_url = "http://localhost:" + port;
 		this.restTemplate = new RestTemplate();
-
+		this.funcHelp = new FunctionHelper();
 	}
 
 	private ObservableList<Node> getGridPaneObservableList(AnchorPane leftPane) {
@@ -52,19 +53,18 @@ public class SendElementRequests {
 				attributesKeyTextField, attributesValueTextField, expirationDateTextField);
 
 		try {
-		ElementTO elementAfterPost = this.restTemplate.postForObject(url, newelement, ElementTO.class,
-				userPlaygroundTextField.getText().trim(), emailTextField.getText().trim());
-		ShowElement(rightPane, elementAfterPost);
-		}
-		catch (Exception e) {
-			errorScreen( rightPane, "error while geting data \n");
+			ElementTO elementAfterPost = this.restTemplate.postForObject(url, newelement, ElementTO.class,
+					userPlaygroundTextField.getText().trim(), emailTextField.getText().trim());
+			ShowElement(rightPane, elementAfterPost);
+		} catch (Exception e) {
+			funcHelp.printToRightScreen(rightPane, "error while add new element \n");
 		}
 	}
 
 	private ElementTO newElementFromGUI(TextField elementNameTextField, TextField elementTypeTextField,
 			TextField locationTextField, TextField attributesKeyTextField, TextField attributesValueTextField,
 			TextField expirationDateTextField) {
-		
+
 		ElementTO newElement = new ElementTO();
 		String elementName = elementNameTextField.getText().trim();
 		String elementType = elementTypeTextField.getText().trim();
@@ -81,23 +81,25 @@ public class SendElementRequests {
 		}
 		if (!location.isEmpty()) {
 			String[] splitLocation = location.split(",");
-			
+
 			try {
-				newElement.setLocation(new Location(Double.parseDouble(splitLocation[0]),Double.parseDouble(splitLocation[1])));
-			}catch(NumberFormatException e) {
-				
+				newElement.setLocation(
+						new Location(Double.parseDouble(splitLocation[0]), Double.parseDouble(splitLocation[1])));
+			} catch (NumberFormatException e) {
+				return null;
 			}
 		}
-		if (!attributesKey.isEmpty()&& !attributesValue.isEmpty()) {
+		if (!attributesKey.isEmpty() && !attributesValue.isEmpty()) {
 			newElement.addAttributes(attributesKey, attributesValue);
 		}
 
 		if (!expirationDate.isEmpty()) {
 			try {
-			DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-			Date date = format.parse(expirationDate);
-			newElement.setExirationDate(date);
+				DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+				Date date = format.parse(expirationDate);
+				newElement.setExirationDate(date);
 			} catch (ParseException e) {
+				return null;
 			}
 		}
 
@@ -107,8 +109,8 @@ public class SendElementRequests {
 	public void updateElementRequest(AnchorPane leftPane, AnchorPane rightPane) {
 		ObservableList<Node> gridPaneobservableList = getGridPaneObservableList(leftPane);
 		String url = base_url + "/playground/elements/{userPlayground}/{userEmail}/{Playground}/{Id}";
-	    
-	    TextField userPlaygroundTextField = (TextField) gridPaneobservableList.get(1);
+
+		TextField userPlaygroundTextField = (TextField) gridPaneobservableList.get(1);
 		TextField emailTextField = (TextField) gridPaneobservableList.get(3);
 		TextField elementPlaygroundTextField = (TextField) gridPaneobservableList.get(5);
 		TextField IdTextField = (TextField) gridPaneobservableList.get(7);
@@ -124,15 +126,14 @@ public class SendElementRequests {
 		ElementTO updatedElement = newElementFromGUI(elementNameTextField, elementTypeTextField, locationTextField,
 				attributesKeyTextField, attributesValueTextField, expirationDateTextField);
 		try {
-		this.restTemplate.put(url, updatedElement, userPlaygroundTextField.getText().trim(),
-				emailTextField.getText().trim(), elementPlaygroundTextField.getText().trim(),
-				IdTextField.getText().trim());
-		ShowElement(rightPane, updatedElement);
+			this.restTemplate.put(url, updatedElement, userPlaygroundTextField.getText().trim(),
+					emailTextField.getText().trim(), elementPlaygroundTextField.getText().trim(),
+					IdTextField.getText().trim());
+			funcHelp.printToRightScreen(rightPane, "update success\n");
+		} catch (Exception e) {
+			funcHelp.printToRightScreen(rightPane, "error while update element\n");
 		}
-		catch (Exception e) {
-			errorScreen( rightPane, "error while geting data \n");
-		}
-		
+
 	}
 
 	public void getElementsRequest(AnchorPane leftPane, AnchorPane rightPane) {
@@ -144,15 +145,14 @@ public class SendElementRequests {
 		TextField IdField = (TextField) gridPaneobservableList.get(7);
 
 		try {
-		// get data form web
-		ElementTO element = getElementFromServer(userPlaygroundTextField, emailTextField, elementPlaygroundField,
-				IdField);
+			// get data form web
+			ElementTO element = getElementFromServer(userPlaygroundTextField, emailTextField, elementPlaygroundField,
+					IdField);
 
-		// show data
-		ShowElement(rightPane, element);
-		}
-		catch (Exception e) {
-			errorScreen( rightPane, "error while geting data \n");
+			// show data
+			ShowElement(rightPane, element);
+		} catch (Exception e) {
+			funcHelp.printToRightScreen(rightPane, "error while get element \n");
 		}
 	}
 
@@ -179,10 +179,9 @@ public class SendElementRequests {
 		if (!IdField.getText().trim().isEmpty()) {
 			elementId = IdField.getText();
 		}
-		
-		ElementTO element = this.restTemplate.getForObject(url, ElementTO.class, userPlayground, email, elementPlayground,
-				elementId);
-		
+
+		ElementTO element = this.restTemplate.getForObject(url, ElementTO.class, userPlayground, email,
+				elementPlayground, elementId);
 
 		return element;
 	}
@@ -210,15 +209,14 @@ public class SendElementRequests {
 		TextField pageTextField = (TextField) gridPaneobservableList.get(7);
 
 		try {
-		// get data form web
-		ElementTO[] elements = getAllElementsFromServer(userPlaygroundTextField, emailTextField, sizeTextField,
-				pageTextField);
+			// get data form web
+			ElementTO[] elements = getAllElementsFromServer(userPlaygroundTextField, emailTextField, sizeTextField,
+					pageTextField);
 
-		// show data
-		ShowElements(rightPane, elements);
-		}
-		catch (Exception e) {
-			errorScreen( rightPane, "error while geting data \n");
+			// show data
+			ShowElements(rightPane, elements);
+		} catch (Exception e) {
+			funcHelp.printToRightScreen(rightPane, "error while get all elements \n");
 		}
 
 	}
@@ -240,18 +238,21 @@ public class SendElementRequests {
 		if (!emailTextField.getText().trim().isEmpty()) {
 			email = emailTextField.getText();
 		}
+		try {
+			if (!sizeTextField.getText().trim().isEmpty()) {
+				size = Integer.parseInt(sizeTextField.getText());
+			}
 
-		if (!sizeTextField.getText().trim().isEmpty()) {
-			size = Integer.parseInt(sizeTextField.getText());
+			if (!pageTextField.getText().trim().isEmpty()) {
+				page = Integer.parseInt(pageTextField.getText());
+			}
+		} catch (Exception e) {
+			return null;
 		}
 
-		if (!pageTextField.getText().trim().isEmpty()) {
-			page = Integer.parseInt(pageTextField.getText());
-		}
+		ElementTO[] elements = this.restTemplate.getForObject(url, ElementTO[].class, userPlayground, email, size,
+				page);
 
-		ElementTO[] elements = this.restTemplate.getForObject(url, ElementTO[].class, userPlayground, email,
-				size, page);
-				
 		return elements;
 	}
 
@@ -292,16 +293,15 @@ public class SendElementRequests {
 		TextField pageTextField = (TextField) gridPaneobservableList.get(13);
 
 		try {
-		// get data form web
-		ElementTO[] elements = getAllNearElementsFromServer(userPlaygroundTextField, emailTextField, xTextField,
-				yTextField, distanceTextField, sizeTextField, pageTextField);
+			// get data form web
+			ElementTO[] elements = getAllNearElementsFromServer(userPlaygroundTextField, emailTextField, xTextField,
+					yTextField, distanceTextField, sizeTextField, pageTextField);
 
-		// show data
-		ShowElements(rightPane, elements);
-	}
-	catch (Exception e) {
-		 errorScreen( rightPane, "error while geting data \n");
-	}
+			// show data
+			ShowElements(rightPane, elements);
+		} catch (Exception e) {
+			funcHelp.printToRightScreen(rightPane, "error while get all near elements \n");
+		}
 
 	}
 
@@ -328,30 +328,32 @@ public class SendElementRequests {
 			email = emailTextField.getText();
 		}
 
-		if (!xTextField.getText().trim().isEmpty()) {
-			x = Double.parseDouble(xTextField.getText());
-		}
-
-		if (!yTextField.getText().trim().isEmpty()) {
-			y = Double.parseDouble(yTextField.getText());
-		}
-
 		if (!distanceTextField.getText().trim().isEmpty()) {
 			distance = distanceTextField.getText();
 		}
 
-		if (!sizeTextField.getText().trim().isEmpty()) {
-			size = Integer.parseInt(sizeTextField.getText());
-		}
+		try {
+			if (!xTextField.getText().trim().isEmpty()) {
+				x = Double.parseDouble(xTextField.getText());
+			}
 
-		if (!pageTextField.getText().trim().isEmpty()) {
-			page = Integer.parseInt( pageTextField.getText());
-		}
+			if (!yTextField.getText().trim().isEmpty()) {
+				y = Double.parseDouble(yTextField.getText());
+			}
 
+			if (!sizeTextField.getText().trim().isEmpty()) {
+				size = Integer.parseInt(sizeTextField.getText());
+			}
+
+			if (!pageTextField.getText().trim().isEmpty()) {
+				page = Integer.parseInt(pageTextField.getText());
+			}
+		} catch (Exception e) {
+			return null;
+		}
 		// go to web to get data
-		ElementTO[] elements = this.restTemplate.getForObject(url, ElementTO[].class, userPlayground, email, x,
-				y, distance, size, page);
-
+		ElementTO[] elements = this.restTemplate.getForObject(url, ElementTO[].class, userPlayground, email, x, y,
+				distance, size, page);
 
 		return elements;
 	}
@@ -367,14 +369,13 @@ public class SendElementRequests {
 		TextField pageTextField = (TextField) gridPaneobservableList.get(11);
 
 		try {
-		ElementTO[] elements = getAllElementsWithAttributeFromServer(userPlaygroundTextField, emailTextField,
-				attributeTextField, valueTextField, sizeTextField, pageTextField);
+			ElementTO[] elements = getAllElementsWithAttributeFromServer(userPlaygroundTextField, emailTextField,
+					attributeTextField, valueTextField, sizeTextField, pageTextField);
 
-		// show data
-		ShowElements(rightPane, elements);
-		}
-		catch (Exception e) {
-			 errorScreen( rightPane, "error while geting data \n");
+			// show data
+			ShowElements(rightPane, elements);
+		} catch (Exception e) {
+			funcHelp.printToRightScreen(rightPane, "error while get all elements with attribute \n");
 		}
 
 	}
@@ -408,41 +409,24 @@ public class SendElementRequests {
 		if (!valueTextField.getText().trim().isEmpty()) {
 			value = valueTextField.getText();
 		}
+		try {
+			if (!sizeTextField.getText().trim().isEmpty()) {
+				size = Integer.parseInt(sizeTextField.getText());
+			}
 
-		if (!sizeTextField.getText().trim().isEmpty()) {
-			size = Integer.parseInt(sizeTextField.getText());
-		}
-
-		if (!pageTextField.getText().trim().isEmpty()) {
-			page = Integer.parseInt( pageTextField.getText());
+			if (!pageTextField.getText().trim().isEmpty()) {
+				page = Integer.parseInt(pageTextField.getText());
+			}
+		} catch (Exception e) {
+			return null;
 		}
 
 		// go to web to get data
-		
 
-
-		ElementTO[] elements = this.restTemplate.getForObject(url, ElementTO[].class, userPlayground, email, attribute,value,
-				 size, page);
+		ElementTO[] elements = this.restTemplate.getForObject(url, ElementTO[].class, userPlayground, email, attribute,
+				value, size, page);
 
 		return elements;
-	}
-	
-	
-	public void errorScreen(AnchorPane rightPane,String errorText)
-	{
-		rightPane.getChildren().clear();
-		
-
-		GridPane root = new GridPane();
-		root.setHgap(10);
-		root.setVgap(10);
-		Text text = new Text();
-		
-		
-		text.setText(errorText);
-		root.add(text, 5, 0);
-
-		rightPane.getChildren().add(root);
 	}
 
 }
