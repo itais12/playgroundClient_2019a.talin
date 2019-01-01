@@ -51,9 +51,14 @@ public class SendElementRequests {
 		ElementTO newelement = newElementFromGUI(elementNameTextField, elementTypeTextField, locationTextField,
 				attributesKeyTextField, attributesValueTextField, expirationDateTextField);
 
+		try {
 		ElementTO elementAfterPost = this.restTemplate.postForObject(url, newelement, ElementTO.class,
 				userPlaygroundTextField.getText().trim(), emailTextField.getText().trim());
 		ShowElement(rightPane, elementAfterPost);
+		}
+		catch (Exception e) {
+			errorScreen( rightPane, "error while geting data \n");
+		}
 	}
 
 	private ElementTO newElementFromGUI(TextField elementNameTextField, TextField elementTypeTextField,
@@ -133,12 +138,17 @@ public class SendElementRequests {
 		TextField elementPlaygroundField = (TextField) gridPaneobservableList.get(5);
 		TextField IdField = (TextField) gridPaneobservableList.get(7);
 
+		try {
 		// get data form web
 		ElementTO element = getElementFromServer(userPlaygroundTextField, emailTextField, elementPlaygroundField,
 				IdField);
 
 		// show data
 		ShowElement(rightPane, element);
+		}
+		catch (Exception e) {
+			errorScreen( rightPane, "error while geting data \n");
+		}
 	}
 
 	private ElementTO getElementFromServer(TextField userPlaygroundTextField, TextField emailTextField,
@@ -194,12 +204,17 @@ public class SendElementRequests {
 		TextField sizeTextField = (TextField) gridPaneobservableList.get(5);
 		TextField pageTextField = (TextField) gridPaneobservableList.get(7);
 
+		try {
 		// get data form web
 		ElementTO[] elements = getAllElementsFromServer(userPlaygroundTextField, emailTextField, sizeTextField,
 				pageTextField);
 
 		// show data
 		ShowElements(rightPane, elements);
+		}
+		catch (Exception e) {
+			errorScreen( rightPane, "error while geting data \n");
+		}
 
 	}
 
@@ -210,7 +225,7 @@ public class SendElementRequests {
 
 		String userPlayground = "2019a.talin";
 		String email = "demouser@mail.com";
-		int size = 10;
+		int size = 7;
 		int page = 0;
 
 		if (!userPlaygroundTextField.getText().trim().isEmpty()) {
@@ -227,9 +242,7 @@ public class SendElementRequests {
 
 		if (!pageTextField.getText().trim().isEmpty()) {
 			page = Integer.parseInt(pageTextField.getText());
-			System.out.println(page);
 		}
-		System.out.println(page);
 
 		ElementTO[] elements = this.restTemplate.getForObject(url, ElementTO[].class, userPlayground, email,
 				size, page);
@@ -273,14 +286,17 @@ public class SendElementRequests {
 		TextField sizeTextField = (TextField) gridPaneobservableList.get(11);
 		TextField pageTextField = (TextField) gridPaneobservableList.get(13);
 
-		System.out.println(userPlaygroundTextField.getText());
-
+		try {
 		// get data form web
 		ElementTO[] elements = getAllNearElementsFromServer(userPlaygroundTextField, emailTextField, xTextField,
 				yTextField, distanceTextField, sizeTextField, pageTextField);
 
 		// show data
 		ShowElements(rightPane, elements);
+	}
+	catch (Exception e) {
+		 errorScreen( rightPane, "error while geting data \n");
+	}
 
 	}
 
@@ -345,11 +361,16 @@ public class SendElementRequests {
 		TextField sizeTextField = (TextField) gridPaneobservableList.get(9);
 		TextField pageTextField = (TextField) gridPaneobservableList.get(11);
 
+		try {
 		ElementTO[] elements = getAllElementsWithAttributeFromServer(userPlaygroundTextField, emailTextField,
 				attributeTextField, valueTextField, sizeTextField, pageTextField);
 
 		// show data
 		ShowElements(rightPane, elements);
+		}
+		catch (Exception e) {
+			 errorScreen( rightPane, "error while geting data \n");
+		}
 
 	}
 
@@ -362,8 +383,8 @@ public class SendElementRequests {
 
 		String userPlayground = "2019a.talin";
 		String email = "demouser@mail.com";
-		String attribute = "eat";
-		String value = "meat";
+		String attribute = "name";
+		String value = "cat";
 		int size = 10;
 		int page = 0;
 
@@ -392,11 +413,31 @@ public class SendElementRequests {
 		}
 
 		// go to web to get data
+		
+
+
 		ElementTO[] elements = this.restTemplate.getForObject(url, ElementTO[].class, userPlayground, email, attribute,value,
 				 size, page);
-			
 
 		return elements;
+	}
+	
+	
+	public void errorScreen(AnchorPane rightPane,String errorText)
+	{
+		rightPane.getChildren().clear();
+		
+
+		GridPane root = new GridPane();
+		root.setHgap(10);
+		root.setVgap(10);
+		Text text = new Text();
+		
+		
+		text.setText(errorText);
+		root.add(text, 5, 0);
+
+		rightPane.getChildren().add(root);
 	}
 
 }

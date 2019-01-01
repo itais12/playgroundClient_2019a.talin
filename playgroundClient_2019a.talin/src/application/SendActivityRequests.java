@@ -56,16 +56,21 @@ public class SendActivityRequests {
 		 
 		 System.out.println(userPlaygroundTextField.getText());
 		 
-		 
+			try {	
 		 //Send new activity
 		 Object obj = sendNewActivityRequest( userPlaygroundTextField, emailTextField,
 					 playgroundTextField,  idTextField, 
 					 elementPlaygroundTextField,  elementIdTextField,
 					 typeTextField ,  attributeNameTextField,
 					 attributeValueTextField);
-		 
 		 // show outcome
 		 ShowActivity( rightPane, obj);
+	}
+	catch (Exception e) {
+		 errorScreen( rightPane, "error while geting data \n");
+	}
+		 
+
 	}
 	
 	private Object sendNewActivityRequest(TextField userPlaygroundTextField,TextField emailTextField,
@@ -182,7 +187,22 @@ public class SendActivityRequests {
 
 	}
 	
-	
+	public void errorScreen(AnchorPane rightPane,String errorText)
+	{
+		rightPane.getChildren().clear();
+		
+
+		GridPane root = new GridPane();
+		root.setHgap(10);
+		root.setVgap(10);
+		Text text = new Text();
+		
+		
+		text.setText(errorText);
+		root.add(text, 5, 0);
+
+		rightPane.getChildren().add(root);
+	}
 	
 
 }
