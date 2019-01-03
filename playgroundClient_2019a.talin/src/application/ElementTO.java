@@ -131,9 +131,9 @@ public class ElementTO {
 
 	@Override
 	public String toString() {
-		return "playground=" + playground + ", id=" + id + ", location=" + location + ", name=" + name
-				+ ",\n creationDate=" + creationDate + ", exirationDate=" + exirationDate + ", type=" + type
-				+ ",\n attributes=" + attributes + ",\n creatorPlayground=" + creatorPlayground + ", creatorEmail="
+		return "playground=" + playground + ", id=" + id + ",\n location=" + location + ", name=" + name
+				+ ",\n creationDate=" + creationDate + ",\n exirationDate=" + exirationDate + ",\n type=" + type
+				+ ",\n attributes=" + attributes + ",\n creatorPlayground=" + creatorPlayground + ",\n creatorEmail="
 				+ creatorEmail + "\n";
 	}
 

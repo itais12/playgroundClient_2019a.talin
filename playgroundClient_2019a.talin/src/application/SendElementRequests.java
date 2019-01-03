@@ -1,7 +1,9 @@
 package application;
 
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -188,16 +190,15 @@ public class SendElementRequests {
 
 	private void ShowElement(AnchorPane rightPane, ElementTO element) {
 		rightPane.getChildren().clear();
-
-		GridPane root = new GridPane();
-		root.setHgap(10);
-		root.setVgap(10);
-
-		Text text = new Text();
+		
+		TextArea text = new TextArea();
+		
 		text.setText("Element: " + element.toString());
-		root.add(text, 5, 0);
+		text.setEditable(false);
+		text.setPrefWidth(380);
+		text.setPrefHeight(750);
 
-		rightPane.getChildren().add(root);
+		rightPane.getChildren().add(text);
 	}
 
 	public void getAllElementsRequest(AnchorPane leftPane, AnchorPane rightPane) {
@@ -228,7 +229,7 @@ public class SendElementRequests {
 
 		String userPlayground = "2019a.talin";
 		String email = "demouser@mail.com";
-		int size = 7;
+		int size = 11;
 		int page = 0;
 
 		if (!userPlaygroundTextField.getText().trim().isEmpty()) {
@@ -260,25 +261,24 @@ public class SendElementRequests {
 
 		rightPane.getChildren().clear();
 
-		GridPane root = new GridPane();
-		root.setHgap(10);
-		root.setVgap(10);
-		Text text = new Text();
+		TextArea text = new TextArea();
 		String theText = "";
 
 		if (elements != null && elements.length > 0) {
 			int i;
 			for (i = 0; i < elements.length; i++) {
-				theText = theText + "Element + " + i + "#: " + elements[i].toString() + " \n";
+				theText = theText + "Element " + i + "#: \n" + elements[i].toString() + " \n";
 			}
 		} else {
 			theText = "No Elements to show ";
 		}
-
+		
 		text.setText(theText);
-		root.add(text, 5, 0);
+		text.setEditable(false);
+		text.setPrefWidth(380);
+		text.setPrefHeight(750);
 
-		rightPane.getChildren().add(root);
+		rightPane.getChildren().add(text);
 	}
 
 	public void getAllNearElementsRequest(AnchorPane leftPane, AnchorPane rightPane) {

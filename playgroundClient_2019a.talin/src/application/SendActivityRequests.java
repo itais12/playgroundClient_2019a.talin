@@ -13,7 +13,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -25,7 +28,8 @@ public class SendActivityRequests {
 	private String port = "8083";
 	private ObjectMapper jackson;
 	FunctionHelper funcHelp;
-
+	String activityType;
+	
 	public SendActivityRequests() {
 		base_url = "http://localhost:" + port;
 		this.restTemplate = new RestTemplate();
@@ -52,8 +56,6 @@ public class SendActivityRequests {
 		TextField attributeNameTextField = (TextField) gridPaneobservableList.get(16);
 		TextField attributeValueTextField = (TextField) gridPaneobservableList.get(18);
 
-		System.out.println(userPlaygroundTextField.getText());
-
 		try {
 			// Send new activity
 			Object obj = sendNewActivityRequest(userPlaygroundTextField, emailTextField, playgroundTextField,
@@ -79,6 +81,7 @@ public class SendActivityRequests {
 		String playground = "2019a.talin";
 		String id = "5";
 		String type = "Feed";
+		activityType = type;
 		String elementPlayground = "2019a.talin";
 		String elementId = "10";
 		String attributeName = "eat";
@@ -110,6 +113,7 @@ public class SendActivityRequests {
 
 		if (!typeTextField.getText().trim().isEmpty()) {
 			type = typeTextField.getText();
+			activityType=type;
 		}
 
 		if (!attributeNameTextField.getText().trim().isEmpty()) {
@@ -121,7 +125,10 @@ public class SendActivityRequests {
 		}
 
 		Map<String, Object> attributes = new HashMap<>();
-		attributes.put(attributeName, attributeValue);
+		//attributes.put(attributeName, attributeValue);
+		
+		attributes.put("size", 10);
+		attributes.put("page", 0);
 
 		ActivityTO activity = new ActivityTO(elementPlayground, elementId, type, userPlayground, email, attributes);
 		activity.setPlayground(playground);
@@ -134,27 +141,51 @@ public class SendActivityRequests {
 
 	private void ShowActivity(AnchorPane rightPane, Object rv) {
 		rightPane.getChildren().clear();
-
+        Image image ;
+		ImageView imageView =new ImageView();
+		
+		
 		GridPane root = new GridPane();
 		root.setHgap(10);
 		root.setVgap(10);
 
-		Text text = new Text();
+		TextArea text = new TextArea();
+		text.setEditable(false);
 		Map<String, Object> rvMap = null;
 
 		try {
 			rvMap = this.jackson.readValue(this.jackson.writeValueAsString(rv), Map.class);
+			System.out.println(rvMap);
 		} catch (Exception e) {
 
 		}
+		
 		if (rvMap != null) {
-			text.setText("" + rvMap.toString());
-			root.add(text, 5, 0);
 
-			rightPane.getChildren().add(root);
+		if("Feed".equalsIgnoreCase(activityType)) {
+			image=new Image("feedanimal.jpg");
+			//imageView.setImage(image);
+			
+			text.setText("message : " + rvMap.get("message"));
+
+		}else if("Pet".equalsIgnoreCase(activityType)) {
+			text.setText("message : " + rvMap.get("message"));
+
+		}else if("PostMessage".equalsIgnoreCase(activityType)) {
+			text.setText("message : " + rvMap.get("message"));
+		}
+		else if("ReadFromBoard".equalsIgnoreCase(activityType)) {
+			text.setText(""+rvMap);
+		}
+
+		root.add(text, 0, 0);
+		//root.add(imageView, 0, 3);
+
+		rightPane.getChildren().add(root);
+
 		} else {
 			text.setText("can't show the result \n");
-			root.add(text, 5, 0);
+			root.add(text, 0, 0);
 
 			rightPane.getChildren().add(root);
 		}

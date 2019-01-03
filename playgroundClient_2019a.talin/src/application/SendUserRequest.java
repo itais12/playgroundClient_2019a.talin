@@ -4,6 +4,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -99,16 +100,15 @@ public class SendUserRequest {
 
 	private void ShowUser(AnchorPane rightPane, UserTO registerUser) {
 		rightPane.getChildren().clear();
-
-		GridPane root = new GridPane();
-		root.setHgap(10);
-		root.setVgap(10);
-
-		Text text = new Text();
+		
+		TextArea text = new TextArea();
+		
 		text.setText("User: " + registerUser.toString());
-		root.add(text, 5, 0);
+		text.setEditable(false);
+		text.setPrefWidth(380);
+		text.setPrefHeight(750);
 
-		rightPane.getChildren().add(root);
+		rightPane.getChildren().add(text);
 	}
 
 	private NewUserForm newUserFromGUI(TextField emailTextField, TextField usernameTextField, TextField avatarTextField,
