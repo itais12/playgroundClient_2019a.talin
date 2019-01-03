@@ -166,13 +166,13 @@ public class SendActivityRequests {
 			image=new Image("feedanimal.jpg");
 			//imageView.setImage(image);
 			
-			text.setText("message : " + rvMap.get("message"));
+			text.setText("message : " + rvMap.get("content"));
 
 		}else if("Pet".equalsIgnoreCase(activityType)) {
-			text.setText("message : " + rvMap.get("message"));
+			text.setText("message : " + rvMap.get("content"));
 
 		}else if("PostMessage".equalsIgnoreCase(activityType)) {
-			text.setText("message : " + rvMap.get("message"));
+			text.setText("message : " + rvMap.get("content"));
 		}
 		else if("ReadFromBoard".equalsIgnoreCase(activityType)) {
 			text.setText(""+rvMap);
