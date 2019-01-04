@@ -55,12 +55,14 @@ public class SendActivityRequests {
 		TextField typeTextField = (TextField) gridPaneobservableList.get(14);
 		TextField attributeNameTextField = (TextField) gridPaneobservableList.get(16);
 		TextField attributeValueTextField = (TextField) gridPaneobservableList.get(18);
+		TextField attributeNameTextField2 = (TextField) gridPaneobservableList.get(20);
+		TextField attributeValueTextField2 = (TextField) gridPaneobservableList.get(22);
 
 		try {
 			// Send new activity
 			Object obj = sendNewActivityRequest(userPlaygroundTextField, emailTextField, playgroundTextField,
 					idTextField, elementPlaygroundTextField, elementIdTextField, typeTextField, attributeNameTextField,
-					attributeValueTextField);
+					attributeValueTextField,attributeNameTextField2,attributeValueTextField2);
 			// show outcome
 			ShowActivity(rightPane, obj);
 		} catch (Exception e) {
@@ -72,7 +74,8 @@ public class SendActivityRequests {
 	private Object sendNewActivityRequest(TextField userPlaygroundTextField, TextField emailTextField,
 			TextField playgroundTextField, TextField idTextField, TextField elementPlaygroundTextField,
 			TextField elementIdTextField, TextField typeTextField, TextField attributeNameTextField,
-			TextField attributeValueTextField) {
+			TextField attributeValueTextField,TextField attributeNameTextField2
+			,TextField attributeValueTextField2) {
 		String url = base_url + "/playground/activities/{userPlayground}/{email}";
 
 		String userPlayground = "2019a.talin";
@@ -84,8 +87,10 @@ public class SendActivityRequests {
 		activityType = type;
 		String elementPlayground = "2019a.talin";
 		String elementId = "10";
-		String attributeName = "eat";
-		String attributeValue = "meat";
+		String attributeName = "size";
+		String attributeValue = "10";
+		String attributeName2 = "page";
+		String attributeValue2 = "0";
 
 		if (!userPlaygroundTextField.getText().trim().isEmpty()) {
 			userPlayground = userPlaygroundTextField.getText();
@@ -123,12 +128,31 @@ public class SendActivityRequests {
 		if (!attributeValueTextField.getText().trim().isEmpty()) {
 			attributeValue = attributeValueTextField.getText();
 		}
+		
+		if (!attributeNameTextField2.getText().trim().isEmpty()) {
+			attributeName2 = attributeNameTextField.getText();
+		}
+
+		if (!attributeValueTextField2.getText().trim().isEmpty()) {
+			attributeValue2 = attributeValueTextField.getText();
+		}
 
 		Map<String, Object> attributes = new HashMap<>();
-		//attributes.put(attributeName, attributeValue);
 		
-		attributes.put("size", 10);
-		attributes.put("page", 0);
+		if("ReadFromBoard".equalsIgnoreCase(type))
+		{
+			attributes.put(attributeName, Integer.parseInt(attributeValue));
+			attributes.put(attributeName2, Integer.parseInt(attributeValue2) );
+		}
+		else
+		{
+			attributes.put(attributeName, attributeValue);
+			attributes.put(attributeName2, attributeValue2);
+		}
+
+		
+		//attributes.put("size", 10);
+		//attributes.put("page", 0);
 
 		ActivityTO activity = new ActivityTO(elementPlayground, elementId, type, userPlayground, email, attributes);
 		activity.setPlayground(playground);
@@ -141,55 +165,86 @@ public class SendActivityRequests {
 
 	private void ShowActivity(AnchorPane rightPane, Object rv) {
 		rightPane.getChildren().clear();
-        Image image ;
-		ImageView imageView =new ImageView();
 		
-		
-		GridPane root = new GridPane();
-		root.setHgap(10);
-		root.setVgap(10);
-
-		TextArea text = new TextArea();
-		text.setEditable(false);
-		Map<String, Object> rvMap = null;
-
 		try {
-			rvMap = this.jackson.readValue(this.jackson.writeValueAsString(rv), Map.class);
-			System.out.println(rvMap);
-		} catch (Exception e) {
-
-		}
 		
-		if (rvMap != null) {
-
 		if("Feed".equalsIgnoreCase(activityType)) {
-			image=new Image("feedanimal.jpg");
-			//imageView.setImage(image);
-			
-			text.setText("message : " + rvMap.get("content"));
+			showActivityMeassage( rightPane,  rv);
+			showImage(rightPane);
 
 		}else if("Pet".equalsIgnoreCase(activityType)) {
-			text.setText("message : " + rvMap.get("content"));
+			showActivityMeassage( rightPane,  rv);
+			showImage(rightPane);
 
 		}else if("PostMessage".equalsIgnoreCase(activityType)) {
-			text.setText("message : " + rvMap.get("content"));
+			showActivityMeassage( rightPane,  rv);
+			showImage(rightPane);
 		}
 		else if("ReadFromBoard".equalsIgnoreCase(activityType)) {
-			text.setText(""+rvMap);
+			showActivityMeassages( rightPane,  rv);
+			showImage(rightPane);
 		}
-
-		root.add(text, 0, 0);
-		//root.add(imageView, 0, 3);
-
-		rightPane.getChildren().add(root);
-
-		} else {
+		
+		}catch (Exception e) {
+			TextArea text = new TextArea();
 			text.setText("can't show the result \n");
-			root.add(text, 0, 0);
 
-			rightPane.getChildren().add(root);
+			rightPane.getChildren().add(text);
 		}
 
+
+	}
+	
+	private void showActivityMeassage(AnchorPane rightPane, Object rv) throws JsonParseException, JsonMappingException, JsonProcessingException, IOException
+	{
+		Message returnMessage = this.jackson.readValue(this.jackson.writeValueAsString(rv), Message.class);
+		
+		TextArea text = new TextArea();
+		
+		text.setText("message: " + returnMessage.getContent());
+		text.setEditable(false);
+		text.setPrefWidth(380);
+		text.setPrefHeight(350);
+
+		rightPane.getChildren().add(text);
+
+	}
+	
+	private void showActivityMeassages(AnchorPane rightPane, Object rv) throws JsonParseException, JsonMappingException, JsonProcessingException, IOException
+	{
+		ReadFromBoardResult returnReadFromBoardResult = this.jackson.readValue(this.jackson.writeValueAsString(rv), ReadFromBoardResult.class);
+		
+		TextArea text = new TextArea();
+		
+		int i;
+		String buildText = "";
+		
+		if(returnReadFromBoardResult.getResults()!= null && returnReadFromBoardResult.getResults().size() > 0)
+		{
+			for(i=0;i<returnReadFromBoardResult.getResults().size();i++)
+			{
+				buildText += "message #"+ i +":"+returnReadFromBoardResult.getResults().get(i) + "\n";
+			}
+		}
+		else
+		{
+			buildText = "No messages to show\n";
+		}
+
+		
+		text.setText("messages: \n" + buildText);
+		text.setEditable(false);
+		text.setPrefWidth(380);
+		text.setPrefHeight(350);
+
+		rightPane.getChildren().add(text);
+
+	}
+	
+	
+	private void showImage(AnchorPane rightPane)
+	{
+		
 	}
 
 }

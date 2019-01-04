@@ -718,6 +718,15 @@ public class PlaygroundController {
 		Text attributeValueText = new Text();
 		attributeValueText.setText("Enter attribute value");
 		TextField attributeValueTextField = new TextField();
+		
+		
+		Text attributeNameText2 = new Text();
+		attributeNameText2.setText("Enter attribute name");
+		TextField attributeNameTextField2 = new TextField();
+
+		Text attributeValueText2 = new Text();
+		attributeValueText2.setText("Enter attribute value");
+		TextField attributeValueTextField2 = new TextField();
 
 		root.add(userPlaygroundText, 5, 0);
 		root.add(userPlaygroundTextField, 5, 1);
@@ -747,8 +756,14 @@ public class PlaygroundController {
 
 		root.add(attributeValueText, 5, 17);
 		root.add(attributeValueTextField, 5, 18);
+		
+		root.add(attributeNameText2, 5, 19);
+		root.add(attributeNameTextField2, 5, 20);
 
-		root.add(SendButton, 5, 19);
+		root.add(attributeValueText2, 5, 21);
+		root.add(attributeValueTextField2, 5, 22);
+
+		root.add(SendButton, 5, 23);
 
 		leftPane.getChildren().add(root);
 
