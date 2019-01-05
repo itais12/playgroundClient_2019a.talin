@@ -170,19 +170,18 @@ public class SendActivityRequests {
 		
 		if("Feed".equalsIgnoreCase(activityType)) {
 			showActivityMeassage( rightPane,  rv);
-			showImage(rightPane);
+			showImage(rightPane,activityType);
 
 		}else if("Pet".equalsIgnoreCase(activityType)) {
 			showActivityMeassage( rightPane,  rv);
-			showImage(rightPane);
+			showImage(rightPane,activityType);
 
 		}else if("PostMessage".equalsIgnoreCase(activityType)) {
 			showActivityMeassage( rightPane,  rv);
-			showImage(rightPane);
+			showImage(rightPane,activityType);
 		}
 		else if("ReadFromBoard".equalsIgnoreCase(activityType)) {
 			showActivityMeassages( rightPane,  rv);
-			showImage(rightPane);
 		}
 		
 		}catch (Exception e) {
@@ -242,9 +241,27 @@ public class SendActivityRequests {
 	}
 	
 	
-	private void showImage(AnchorPane rightPane)
+	private void showImage(AnchorPane rightPane, String activityType)
 	{
-		
+		Image image = null;
+		try {
+			if("Pet".equalsIgnoreCase(activityType)) {
+				image =new Image("./catpet.jpg");
+			}else if("Feed".equalsIgnoreCase(activityType)) {
+				image =new Image("./feedanimal.jpg");
+			}else if("PostMessage".equalsIgnoreCase(activityType)) {
+				image =new Image("./board.jpg");
+			}
+	    //application/catpet.jpg
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+        ImageView imageView = new ImageView();
+        imageView.setImage(image);
+        imageView.setFitHeight(300);
+        imageView.setFitWidth(400);
+        AnchorPane.setBottomAnchor(imageView, 0.0);
+		rightPane.getChildren().add(imageView);
 	}
 
 }
