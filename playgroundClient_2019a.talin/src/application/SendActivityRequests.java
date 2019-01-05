@@ -246,11 +246,11 @@ public class SendActivityRequests {
 		Image image = null;
 		try {
 			if("Pet".equalsIgnoreCase(activityType)) {
-				image =new Image("./catpet.jpg");
+				image =new Image("catpet.jpg");
 			}else if("Feed".equalsIgnoreCase(activityType)) {
-				image =new Image("./feedanimal.jpg");
+				image =new Image("feedanimal.jpg");
 			}else if("PostMessage".equalsIgnoreCase(activityType)) {
-				image =new Image("./board.jpg");
+				image =new Image("board.jpg");
 			}
 	    //application/catpet.jpg
 		}catch (Exception e) {
